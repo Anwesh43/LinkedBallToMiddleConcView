@@ -29,3 +29,31 @@ fun Int.inverse() : Float = 1f / this
 fun Float.maxScale(i : Int, n : Int) : Float = Math.max(0f, this - i * n.inverse())
 fun Float.divideScale(i : Int, n : Int) : Float = Math.min(n.inverse(), maxScale(i, n)) * n
 fun Float.sinify() : Float = Math.sin(this * Math.PI).toFloat()
+
+fun Canvas.drawBallToMiddleConc(scale : Float, w : Float, h : Float, paint : Paint) {
+    val size : Float = Math.min(w, h) / sizeFactor
+    val sf : Float = scale.sinify()
+    val r : Float = Math.min(w, h) / ballFactor
+    save()
+    translate(w / 2, h / 2 - (h / 2 + r) * (1-   sf.divideScale(0, parts)))
+    save()
+    rotate(deg * sf.divideScale(2, parts))
+    paint.style = Paint.Style.FILL
+    drawCircle(size, 0f, r, paint)
+    restore()
+    save()
+    paint.style = Paint.Style.STROKE
+    drawLine(0f, 0f, size * sf.divideScale(1, parts), 0f, paint)
+    drawArc(RectF(-size, -size, size, size), 0f, deg * sf.divideScale(2, parts), false, paint)
+    restore()
+    restore()
+}
+
+fun Canvas.drawBTMCNode(i : Int, scale : Float, paint : Paint) {
+    val w : Float = width.toFloat()
+    val h : Float = height.toFloat()
+    paint.color = colors[i]
+    paint.strokeCap = Paint.Cap.ROUND
+    paint.strokeWidth = Math.min(w, h) / strokeFactor
+    drawBallToMiddleConc(scale, w, h, paint)
+}
