@@ -207,7 +207,7 @@ class BallToMiddleConcView(ctx : Context) : View(ctx) {
 
         fun handleTap() {
             btmc.startUpdating {
-                animator.stop()
+                animator.start()
             }
         }
     }
