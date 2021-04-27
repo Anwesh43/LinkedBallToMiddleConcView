@@ -211,4 +211,13 @@ class BallToMiddleConcView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : BallToMiddleConcView {
+            val view : BallToMiddleConcView = BallToMiddleConcView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
