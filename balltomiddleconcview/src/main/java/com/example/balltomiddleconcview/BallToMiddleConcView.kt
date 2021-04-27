@@ -41,7 +41,7 @@ fun Canvas.drawBallToMiddleConc(scale : Float, w : Float, h : Float, paint : Pai
     save()
     rotate(deg * sf.divideScale(2, parts))
     paint.style = Paint.Style.FILL
-    drawCircle(size, 0f, r, paint)
+    drawCircle(size * sf.divideScale(1, parts), 0f, r, paint)
     restore()
     save()
     paint.style = Paint.Style.STROKE
